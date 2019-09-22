@@ -13,14 +13,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.spreadsheet.automation.RegressionTests;
 import org.mule.module.google.spreadsheet.model.Row;
 import org.mule.modules.tests.ConnectorTestUtils;

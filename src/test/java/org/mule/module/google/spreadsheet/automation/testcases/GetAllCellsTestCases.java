@@ -13,7 +13,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -22,7 +21,6 @@ import org.junit.experimental.categories.Category;
 import org.mule.module.google.spreadsheet.automation.RegressionTests;
 import org.mule.module.google.spreadsheet.automation.SmokeTests;
 import org.mule.module.google.spreadsheet.model.Row;
-import org.mule.module.google.spreadsheet.model.Worksheet;
 
 public class GetAllCellsTestCases extends GoogleSpreadsheetsTestParent {
 

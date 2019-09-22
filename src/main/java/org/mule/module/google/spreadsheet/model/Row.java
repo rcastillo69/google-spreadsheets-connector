@@ -21,45 +21,46 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * @author mariano.gonzalez@mulesoft.com
  *
  */
-public class Row implements Comparable<Row>{
+public class Row implements Comparable<Row> {
 
 	/**
 	 * Defaults to zero
 	 */
 	private int rowNumber = 0;
-	
+
 	/**
 	 * All the initialized cells in the row
 	 */
 	private List<Cell> cells = new ArrayList<Cell>();
-	
-	public Row(){}
-	
+
+	public Row() {
+	}
+
 	@Override
 	public int compareTo(Row o) {
-		return new Integer(this.rowNumber).compareTo(o.getRowNumber());
+		return Integer.compare(this.rowNumber, o.getRowNumber());
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Row) {
 			Row o = (Row) obj;
 			return this.rowNumber == o.rowNumber;
 		}
-		
+
 		return false;
 	}
-	
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return this.rowNumber;
 	}
-	
+
 	public void sortCells() {
 		Collections.sort(this.cells);
 	}
@@ -74,32 +75,37 @@ public class Row implements Comparable<Row>{
 			cell.setRowNumber(this.rowNumber);
 		}
 	}
-	
+
 	/**
-	 * Adds the cell. The cells row number is modified to match
-	 * this row's row number
-	 * @param cell - the cell
+	 * Adds the cell. The cells row number is modified to match this row's row
+	 * number
+	 * 
+	 * @param cell
+	 *            - the cell
 	 */
-	public void addCell(Cell cell){
+	public void addCell(Cell cell) {
 		cell.setRowNumber(this.rowNumber);
 		this.cells.add(cell);
 	}
-	
+
 	/**
-	 * Adds the cell at the index position. The cells row number is modified to match
-	 * this row's row number
-	 * @param cell - the cell
-	 * @param index - the position of the cell in the list
+	 * Adds the cell at the index position. The cells row number is modified to
+	 * match this row's row number
+	 * 
+	 * @param cell
+	 *            - the cell
+	 * @param index
+	 *            - the position of the cell in the list
 	 */
 	public void addCell(Cell cell, int index) {
 		cell.setRowNumber(this.rowNumber);
 		this.cells.add(index, cell);
 	}
-	
+
 	public void removeCell(Cell cell) {
 		this.cells.remove(cell);
 	}
-	
+
 	public void removeCell(int index) {
 		this.cells.remove(index);
 	}

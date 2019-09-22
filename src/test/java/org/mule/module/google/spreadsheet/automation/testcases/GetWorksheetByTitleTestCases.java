@@ -9,21 +9,21 @@
 
 package org.mule.module.google.spreadsheet.automation.testcases;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
-import org.mule.module.google.spreadsheet.automation.RegressionTests;
-import org.mule.module.google.spreadsheet.model.Worksheet;
-import org.mule.modules.tests.ConnectorTestUtils;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.mule.module.google.spreadsheet.automation.RegressionTests;
+import org.mule.module.google.spreadsheet.model.Worksheet;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class GetWorksheetByTitleTestCases extends GoogleSpreadsheetsTestParent {
 
