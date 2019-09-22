@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:google-spreadsheets="http://www.mulesoft.org/schema/mule/google-spreadsheets" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/schema/mule/google-spreadsheets/current/mule-google-spreadsheets.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <google-spreadsheets:config-with-oauth name="Google_Spreadsheets" consumerKey="970304060424-25494strfmks8n92ddko5nhchdlsef7s.apps.googleusercontent.com" consumerSecret="2sgdy1dRC5evFgWQ7ROudsJU" doc:name="Google Spreadsheets">
+        <google-spreadsheets:oauth-callback-config domain="localhost" localPort="3000" remotePort="3000" path="oauthcall"/>
+    </google-spreadsheets:config-with-oauth>
+    <flow name="challengeconnectorFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/read" doc:name="HTTP"/>
+        <logger level="INFO" doc:name="Logger"/>
+        <google-spreadsheets:authorize config-ref="Google_Spreadsheets" doc:name="Google Spreadsheets" accessTokenUrl="https://accounts.google.com/o/oauth2/token" authorizationUrl="https://accounts.google.com/o/oauth2/auth"/>
+        <logger level="INFO" doc:name="Logger" message="You are authenticated"/>
+        <google-spreadsheets:get-all-cells-as-csv config-ref="Google_Spreadsheets" spreadsheet="CompanySmall" worksheet="CompanySmall" doc:name="Google Spreadsheets" accessTokenId="#[flowVars[&quot;OAuthAccessTokenId&quot;]]"/>
+    </flow>
+</mule>
