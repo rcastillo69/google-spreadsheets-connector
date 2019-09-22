@@ -153,10 +153,10 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 			@Override
 			public CellFeed answer(InvocationOnMock invocation) throws Throwable {
 				CellQuery query = (CellQuery) invocation.getArguments()[0];
-				assertTrue("min row mismatch", minRow == query.getMinimumRow());
-				assertTrue("max row mismatch", maxRow == query.getMaximumRow());
-				assertTrue("min col mismatch", minCol == query.getMinimumCol());
-				assertTrue("max col mismatch", maxCol == query.getMaximumCol());
+				assertEquals("min row mismatch", minRow ,(int)query.getMinimumRow());
+				assertEquals("max row mismatch", maxRow, (int) query.getMaximumRow());
+				assertEquals("min col mismatch", minCol, (int)query.getMinimumCol());
+				assertEquals("max col mismatch", maxCol, (int) query.getMaximumCol());
 				
 				return testCellFeed;
 			}
@@ -313,7 +313,7 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 		assertNotNull(row);
 		List<Cell> cells = row.getCells();
 		String[] columns = this.loadTestDataLines()[0].split(",");
-		assertTrue("unexpected number of cells", cells.size() == columns.length);
+		assertEquals("unexpected number of cells",cells.size(), columns.length);
 		
 		for (int i = 0; i < columns.length; i++) {
 			assertEquals("unexpected cell value", cells.get(i).getEvaluatedValue(), columns[i]);
@@ -347,9 +347,9 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 		});
 		
 		List<Row> rows = this.connector.search(SPREADSHEET_NAME, WORKSHEET_NAME, q, 0, 0);
-		assertTrue("only one row was expected", rows.size() == 1);
+		assertEquals("only one row was expected", 1, rows.size());
 		List<Cell> cells = rows.get(0).getCells();
-		assertTrue("only one cell was expected", cells.size() == 1);
+		assertEquals("only one cell was expected", 1, cells.size());
 		assertEquals("another cell value was expected", cells.get(0).getEvaluatedValue(), match);
 	}
 	
@@ -366,7 +366,7 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 		}
 		String[] lines = csv.split("\n");
 		
-		assertTrue("unexpected line numbers", lines.length == expected.size());
+		assertEquals("unexpected line numbers", lines.length, expected.size());
 		for (int i = 0; i < lines.length; i++) {
 			assertEquals("unexpected line content", lines[i], expected.get(i));
 		}
@@ -396,20 +396,20 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 	
 	private void assertRows(List<Row> rows) {
 		String[] lines = this.loadTestDataLines();
-		assertTrue("expected " + lines.length + " rows", rows.size() == lines.length);
+		assertEquals("expected " + lines.length + " rows", rows.size(), lines.length);
 		
 		for (int i = 0; i < rows.size(); i++) {
 			Row row = rows.get(i);
-			assertTrue("Unexpected row number", row.getRowNumber() == i+1);
+			assertEquals("Unexpected row number", row.getRowNumber(), i + 1);
 			String[] columns = lines[i].split(",");
 			
 			List<Cell> cells = row.getCells();
-			assertTrue("Expected " + columns.length + " cells", columns.length == cells.size());
+			assertEquals("Expected " + columns.length + " cells", columns.length, cells.size());
 			
 			for (int j = 0; j < cells.size(); j++) {
 				Cell cell = cells.get(j);
-				assertTrue("unexpected row number", cell.getRowNumber() == row.getRowNumber());
-				assertTrue("unexpected column number", cell.getColumnNumber() == j+1);
+				assertEquals("unexpected row number", cell.getRowNumber(), row.getRowNumber());
+				assertEquals("unexpected column number", cell.getColumnNumber(), j + 1);
 				assertEquals("unexpected evaluated value", cell.getEvaluatedValue(), columns[j]);
 				assertEquals("unexpected formula or value", cell.getValueOrFormula(), columns[j]);
 			}
@@ -501,8 +501,7 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 	private String[] loadTestDataLines() {
 		try {
 			InputStream in = this.getClass().getResourceAsStream("/delimited.csv");
-			String lines[] = IOUtils.toString(in).split("\n");
-			return lines;
+			return IOUtils.toString(in).split("\n");
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
