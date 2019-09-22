@@ -114,7 +114,7 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 		when(this.ss.query(any(SpreadsheetQuery.class), eq(SpreadsheetFeed.class))).thenAnswer(new Answer<SpreadsheetFeed>() {
 			
 			@Override
-			public SpreadsheetFeed answer(InvocationOnMock invocation) throws Throwable {
+			public SpreadsheetFeed answer(InvocationOnMock invocation)  {
 				SpreadsheetQuery query = (SpreadsheetQuery) invocation.getArguments()[0];
 				assertEquals("query title mismatch", SPREADSHEET_NAME, query.getTitleQuery());
 				return testSpreadsheet;
@@ -130,7 +130,7 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 		when(this.ss.query(any(WorksheetQuery.class), eq(WorksheetFeed.class))).thenAnswer(new Answer<WorksheetFeed>() {
 			
 			@Override
-			public WorksheetFeed answer(InvocationOnMock invocation) throws Throwable {
+			public WorksheetFeed answer(InvocationOnMock invocation)  {
 				WorksheetQuery query = (WorksheetQuery) invocation.getArguments()[0];
 				assertEquals("query title mismatch", WORKSHEET_NAME, query.getTitleQuery());
 				return testWorksheet;
@@ -151,7 +151,7 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 		 when(this.ss.query(any(CellQuery.class), eq(CellFeed.class))).thenAnswer(new Answer<CellFeed>() {
 			
 			@Override
-			public CellFeed answer(InvocationOnMock invocation) throws Throwable {
+			public CellFeed answer(InvocationOnMock invocation)  {
 				CellQuery query = (CellQuery) invocation.getArguments()[0];
 				assertEquals("min row mismatch", minRow ,(int)query.getMinimumRow());
 				assertEquals("max row mismatch", maxRow, (int) query.getMaximumRow());
@@ -186,7 +186,7 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 		when(this.docsService.insert(any(URL.class), any(com.google.gdata.data.docs.SpreadsheetEntry.class))).thenAnswer(new Answer() {
 			
 			@Override
-			public Object answer(InvocationOnMock invocation) throws Throwable {
+			public Object answer(InvocationOnMock invocation)  {
 				com.google.gdata.data.docs.SpreadsheetEntry entry = (com.google.gdata.data.docs.SpreadsheetEntry) invocation.getArguments()[1];
 				assertEquals("spreasheet title not as expected", title, entry.getTitle().getPlainText());
 				return null;
@@ -217,7 +217,7 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 		when(this.ss.insert(any(URL.class), any(WorksheetEntry.class))).thenAnswer(new Answer<WorksheetEntry>() {
 			
 			@Override
-			public WorksheetEntry answer(InvocationOnMock invocation) throws Throwable {
+			public WorksheetEntry answer(InvocationOnMock invocation)  {
 				WorksheetEntry entry = (WorksheetEntry) invocation.getArguments()[1];
 				assertEquals("unexpected title", entry.getTitle().getPlainText(), WORKSHEET_NAME);
 				assertEquals("unexpected rowCount", entry.getRowCount(), rowCount);
@@ -336,7 +336,7 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 		when(this.ss.query(any(CellQuery.class), eq(CellFeed.class))).thenAnswer(new Answer<CellFeed>() {
 			
 			@Override
-			public CellFeed answer(InvocationOnMock invocation) throws Throwable {
+			public CellFeed answer(InvocationOnMock invocation)  {
 				CellQuery query = (CellQuery) invocation.getArguments()[0];
 				assertEquals("another query was expected", query.getFullTextQuery(), q);
 
@@ -430,7 +430,7 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 		Mockito.doAnswer(new Answer<Void>() {
 			
 			@Override
-			public Void answer(InvocationOnMock invocation) throws Throwable {
+			public Void answer(InvocationOnMock invocation)  {
 				GoogleSpreadSheetConnector connector = (GoogleSpreadSheetConnector) invocation.getMock();
 				connector.setSpreadsheetService(ss);
 				connector.setDocService(docsService);
@@ -478,7 +478,7 @@ public class GoogleSpreadSheetModuleTest extends TestCase {
 		when(this.testWorksheet.getEntries()).thenReturn(entries);
 	}
 	
-	private void initTestCellFeed() throws Exception {
+	private void initTestCellFeed()  {
 		this.testCellFeed = mock(CellFeed.class);
 		List<CellEntry> entries = new ArrayList<CellEntry>();
 		

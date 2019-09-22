@@ -143,7 +143,7 @@ public class GoogleSpreadSheetConnector extends AbstractGoogleOAuthConnector {
      */
     @Processor
     @OAuthProtected
-    public List<Spreadsheet> getAllSpreadsheets() throws OAuthException, IOException, ServiceException {
+    public List<Spreadsheet> getAllSpreadsheets() throws IOException, ServiceException {
         return ModelParser.parseSpreadsheet(this.spreadsheetService.getFeed(factory.getSpreadsheetsFeedUrl(), SpreadsheetFeed.class));
     }
     
@@ -160,7 +160,7 @@ public class GoogleSpreadSheetConnector extends AbstractGoogleOAuthConnector {
      */
     @Processor
     @OAuthProtected
-    public void createSpreadsheet(String title) throws OAuthException, IOException, ServiceException {
+    public void createSpreadsheet(String title) throws IOException, ServiceException {
 
     	com.google.gdata.data.docs.SpreadsheetEntry newEntry = new com.google.gdata.data.docs.SpreadsheetEntry();
     	
