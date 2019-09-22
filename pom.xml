@@ -36,6 +36,11 @@
 			<version>1.4.5</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		<groupId>com.sun.jersey</groupId>
+		<artifactId>jersey-client</artifactId>
+		<version>1.8</version>
+	</dependency>
 	</dependencies>
 
 	<repositories>

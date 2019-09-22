@@ -18,6 +18,8 @@ import org.mule.module.google.spreadsheet.automation.SmokeTests;
 import org.mule.module.google.spreadsheet.model.Worksheet;
 import org.mule.modules.tests.ConnectorTestUtils;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -42,10 +44,10 @@ public class CreateWorksheetTestCases extends GoogleSpreadsheetsTestParent {
             worksheetTitle = getTestRunMessageValue("worksheet");
 
             Worksheet worksheet = runFlowAndGetPayload("create-worksheet");
-            assertTrue(worksheet != null);
-            assertTrue(worksheet.getName().equals(worksheetTitle));
-            assertTrue(worksheet.getRowCount() == getTestRunMessageValue("rowCount"));
-            assertTrue(worksheet.getColCount() == getTestRunMessageValue("colCount"));
+            assertNotNull(worksheet);
+            assertEquals(worksheet.getName(), worksheetTitle);
+            assertEquals(worksheet.getRowCount(), getTestRunMessageValue("rowCount"));
+            assertEquals(worksheet.getColCount(), getTestRunMessageValue("colCount"));
         } catch (Exception e) {
             fail(ConnectorTestUtils.getStackTrace(e));
         }
