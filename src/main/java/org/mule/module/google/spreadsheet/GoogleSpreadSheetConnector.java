@@ -117,7 +117,6 @@ public class GoogleSpreadSheetConnector extends AbstractGoogleOAuthConnector {
 		credential.setAccessToken(this.getAccessToken());
 		
 		this.spreadsheetService = new SpreadsheetService(this.applicationName);
-		this.spreadsheetService.setProtocolVersion(SpreadsheetService.Versions.V3);
 		this.spreadsheetService.setOAuth2Credentials(credential);
 		setHeaderValue("*");
 		

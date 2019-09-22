@@ -81,7 +81,7 @@ public class Cell implements Comparable<Cell> {
 	 */
 	@Override
 	public int compareTo(Cell o) {
-		return new Integer(this.getColumnNumber()).compareTo(o.getColumnNumber());
+		return Integer.compare(this.getColumnNumber(),o.getColumnNumber());
 	}
 
 	public int getColumnNumber() {
