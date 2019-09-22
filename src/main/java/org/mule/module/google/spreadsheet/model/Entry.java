@@ -29,7 +29,7 @@ import com.google.gdata.data.DateTime;
  */
 public abstract class Entry<T extends BaseEntry<?>> {
 
-	private T delegate;
+	private final T delegate;
 	
 	public Entry(T delegate) {
 		this.delegate = delegate;

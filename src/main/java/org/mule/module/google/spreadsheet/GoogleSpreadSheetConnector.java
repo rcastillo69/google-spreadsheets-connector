@@ -71,7 +71,7 @@ import java.util.List;
 @ReconnectOn(exceptions = OAuthTokenExpiredException.class)
 public class GoogleSpreadSheetConnector extends AbstractGoogleOAuthConnector {
 	
-	private static Logger logger = Logger.getLogger(GoogleSpreadSheetConnector.class);
+	private static final Logger logger = Logger.getLogger(GoogleSpreadSheetConnector.class);
 	
 	/**
      * The OAuth consumer key 
@@ -95,7 +95,7 @@ public class GoogleSpreadSheetConnector extends AbstractGoogleOAuthConnector {
     @Default(USER_PROFILE_SCOPE + " https://spreadsheets.google.com/feeds https://docs.google.com/feeds")
     private String scope;
     
-    private FeedURLFactory factory = FeedURLFactory.getDefault();
+    private final FeedURLFactory factory = FeedURLFactory.getDefault();
     
     /**
      * Application name to communicate to google
