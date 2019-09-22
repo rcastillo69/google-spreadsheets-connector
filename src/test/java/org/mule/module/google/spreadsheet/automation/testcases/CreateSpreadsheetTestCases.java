@@ -27,7 +27,7 @@ public class CreateSpreadsheetTestCases extends GoogleSpreadsheetsTestParent {
     private String spreadsheetTitle;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         initializeTestRunMessage("createSpreadsheet");
         spreadsheetTitle = getTestRunMessageValue("spreadsheet");
     }

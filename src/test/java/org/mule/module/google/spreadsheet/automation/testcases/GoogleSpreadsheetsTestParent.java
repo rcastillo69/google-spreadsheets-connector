@@ -82,7 +82,7 @@ public class GoogleSpreadsheetsTestParent extends ConnectorTestCase {
         return runFlowAndGetPayload("get-worksheet-by-title");
     }
 
-    public void deleteSpreadsheet(String spreadsheet) throws Exception {
+    public void deleteSpreadsheet(String spreadsheet) {
         // Dummy method. Will be implemented when functionality is provided
     }
 
