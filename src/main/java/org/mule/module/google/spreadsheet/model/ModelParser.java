@@ -15,6 +15,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import com.google.gdata.data.spreadsheet.CellEntry;
 import com.google.gdata.data.spreadsheet.CellFeed;
@@ -22,7 +24,6 @@ import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
 import com.google.gdata.data.spreadsheet.WorksheetFeed;
-
 
 /**
  * 
@@ -152,8 +153,43 @@ public abstract class ModelParser {
 	}
 	
 	public static String toCSV(List<Row> rows, String lineSeparator, String columnSeparator) {
-		StringBuilder csv = new StringBuilder();
+        StringBuilder sb = new StringBuilder(); 
 		
+		Function<List<Cell>, String> mapToCsv = list -> {
+	            StringBuilder cvs = new StringBuilder();
+	            list.forEach(c -> cvs.append(c.getEvaluatedValue()).append(columnSeparator));
+	            return cvs.toString().substring(0, cvs.length() - 1) + lineSeparator;
+
+	     };
+
+        List<List<Cell>> listOfNames = rows.stream()
+                .limit(1)
+                .map(Row::getCells)
+                .collect(Collectors.toList());
+
+        String lineofNames = listOfNames.stream()
+                .map(mapToCsv)
+                .collect(Collectors.joining());
+
+
+        sb.append(lineofNames);
+
+        List<List<Cell>> listOfCells = rows.stream()
+                .skip(1)
+                .map(Row::getCells)
+                .collect(Collectors.toList());
+
+        String cvsData = listOfCells.stream()
+                .map(mapToCsv)
+                .collect(Collectors.joining());
+
+        sb.append(cvsData);
+        
+		return sb.toString();
+		
+		/*StringBuilder csv = new StringBuilder();
+		
+		 
 		for (Row row : rows) {
 			int rowNumber = row.getRowNumber();
 			
@@ -170,6 +206,7 @@ public abstract class ModelParser {
 		}
 		
 		return csv.toString();
+		*/
 	}
 	
 }

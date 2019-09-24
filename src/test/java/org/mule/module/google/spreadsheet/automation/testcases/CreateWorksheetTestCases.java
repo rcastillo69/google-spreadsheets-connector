@@ -45,8 +45,8 @@ public class CreateWorksheetTestCases extends GoogleSpreadsheetsTestParent {
             Worksheet worksheet = runFlowAndGetPayload("create-worksheet");
             assertNotNull(worksheet);
             assertEquals(worksheet.getName(), worksheetTitle);
-            assertEquals(worksheet.getRowCount(), getTestRunMessageValue("rowCount"));
-            assertEquals(worksheet.getColCount(), getTestRunMessageValue("colCount"));
+            assertEquals(worksheet.getRowCount(), (int)getTestRunMessageValue("rowCount"));
+            assertEquals(worksheet.getColCount(), (int)getTestRunMessageValue("colCount"));
         } catch (Exception e) {
             fail(ConnectorTestUtils.getStackTrace(e));
         }
