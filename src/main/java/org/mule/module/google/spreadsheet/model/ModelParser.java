@@ -179,34 +179,15 @@ public abstract class ModelParser {
                 .map(Row::getCells)
                 .collect(Collectors.toList());
 
-        String cvsData = listOfCells.stream()
+        String csvData = listOfCells.stream()
                 .map(mapToCsv)
                 .collect(Collectors.joining());
 
-        sb.append(cvsData);
+        sb.append(csvData);
         
 		return sb.toString();
 		
-		/*StringBuilder csv = new StringBuilder();
-		
-		 
-		for (Row row : rows) {
-			int rowNumber = row.getRowNumber();
-			
-			for (Cell cell : row.getCells()) {
 	
-				if (csv.length() > 0) {
-					csv.append(lineSeparator);
-				}
-				
-				csv.append(rowNumber).append(columnSeparator)
-					.append(cell.getColumnNumber()).append(columnSeparator)
-					.append(cell.getEvaluatedValue());
-			}
-		}
-		
-		return csv.toString();
-		*/
 	}
 	
 }
